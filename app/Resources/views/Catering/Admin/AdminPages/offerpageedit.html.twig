@@ -1,19 +1,26 @@
 {% extends "Catering/Admin/adminindex.html.twig" %}
 {% block userdata %}
-<div class="admin-offerpage-container">
     {% if pagedescription is not empty %}
-        <div class="desc-container">
-            <div class="container-title">
-                {{ pagedescription.Title }}
-            </div>
-            <div class="container-description">
-                {{ pagedescription.Description }}
-            </div>
-            <a href="{{ url("offerpage_description_edit", {"id": pagedescription.DescriptionId}) }}" class="button align-center">Edytuj</a>
+    <div class="offer-container auto-side-margins text-justify">
+        <div class="container-description">
+            <div class="offer-title"> {{ pagedescription.Title }}</div>
+            {{ pagedescription.Description }}
         </div>
+        <div class="clear-both"></div>
+    </div>
+    <div class="align-right auto-side-margins" style="width:90%; margin-top:15px; margin-bottom:15px">
+        {{ form_start(deleteform, {"attr": {"class": "inline-block", "style": "margin-right:10px"}}) }}
+        {{ form_widget(deleteform.deleteDescription, {"attr": {"class": "button"}}) }}
+        {{ form_rest(deleteform) }}
+        {{ form_end(deleteform) }}
+        <a href="{{ url("offerpage_description_edit", {"id": pagedescription.DescriptionId}) }}" class="button inline-block align-center" style="float:right;width:50px">Edytuj</a>
+    </div>
+    <div class="clear-both"></div>
     {% else %}
         <a href="{{ url("offerpage_description_add") }}" class="button align-center">Dodaj opis</a>
     {% endif %}
+<div class="admin-offerpage-container">
+
     {% for range in activityrange %}
     <div class="event">
         <a href="{{ url("offerpage_activity_edit", {"id": range.ActivityRangeId}) }}">{{ range.ActivityTitle }}</a>

@@ -87,10 +87,13 @@ class AdminPageController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "view_offer"]);
         $getActivityRange = $entityManager->getRepository(Activityrange::class)->findAll();
-
+        $deleteForm = $this->createFormBuilder()
+            ->add('deleteDescription', SubmitType::class, ["label" => "usuń"])
+            ->getForm();
         return $this->render($this->path . 'offerpageedit.html.twig',[
             "pagedescription" => $getPageDescription,
             "activityrange" => $getActivityRange,
+            "deleteform" => $deleteForm->createView(),
         ]);
     }
     /**

@@ -102,8 +102,6 @@ class MenuController extends Controller
      * @Route("/shoppingbasket/order/show", name="shoppingbasket_order_show")
      */
     public function showOrderAction(\Symfony\Component\HttpFoundation\Request $request){
-        $shoppingBasket = new ShoppingBasketSrvice();
-        $shoppingBasket->initShoppingBasket();
         $orders = new Orders();
 
         $changeAmountForm = $this->createFormBuilder()
@@ -118,8 +116,8 @@ class MenuController extends Controller
             ->getForm();
 
         $orderForm->handleRequest($request);
-        if(($shoppingBasket->getProductsAmount() > 0) && $request->isMethod('post')) {
-            $shoppingBasket->addOwnerData($orders);
+        if(($this->shoppingBasket->getProductsAmount() > 0) && $request->isMethod('post')) {
+            $this->shoppingBasket->addOwnerData($orders);
 
             return new \Symfony\Component\HttpFoundation\Response(
                 var_dump($request->query->get('showJson'))
@@ -155,9 +153,7 @@ class MenuController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function finaliseShoppingAction(){
-       $shoppingBasket = new ShoppingBasketSrvice();
-       $shoppingBasket->initShoppingBasket();
-       $ownerData = $shoppingBasket->getOwnerData();
+       $ownerData = $this->shoppingBasket->getOwnerData();
         return new \Symfony\Component\HttpFoundation\Response(
             json_encode($ownerData->getName())
         );

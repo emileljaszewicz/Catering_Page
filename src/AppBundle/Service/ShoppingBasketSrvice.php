@@ -6,6 +6,7 @@ use AppBundle\Entity\Meals;
 use AppBundle\Entity\Menucategories;
 use AppBundle\Entity\Orders;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 class ShoppingBasketSrvice
 {
@@ -15,7 +16,7 @@ class ShoppingBasketSrvice
 
     public function __construct()
     {
-        $this->session = new Session();
+        $this->session = new Session(new PhpBridgeSessionStorage());
 
     }
 
