@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block otherjavascripts %}
+    <script src="{{ asset('js/shoppingBasket.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="offer-container auto-side-margins text-justify">
+        <div class="container-title" >
+            <img src="{{ asset( categoryInfo.imageid | getImgName) }}" />
+        </div>
+        <div class="container-description">
+            <div class="offer-title">{{ categoryInfo.CategoryName }}</div>
+            {{ categoryInfo.CategoryDescription }}
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    {% for categoryMeal in categoryMeals %}
+        <div class="menu-position-container text-justify">
+            <div class="container-title" >
+                <img src="{{ asset( categoryMeal.imageid | getImgName) }}" />
+            </div>
+            <div class="container-description">
+                <div class="offer-title"><p style="width:80%; display:inline-block">{{ categoryMeal.MealName }}</p><p style="width:20%; display: inline-block; text-align:right">{{ categoryMeal.Price }} zł</p></div>
+                <div class="offer-content">{{ categoryMeal.MealDescription }}</div>
+                <div class="order-container">
+                    {{ form_start(buttons[categoryMeal.MealId], {'action': path('shoppingbasket_productamount_get', {'menucategories': categoryInfo.CategoryId, 'meals': categoryMeal.MealId})}) }}
+                    {{ form_widget(buttons[categoryMeal.MealId].orderbutton, {"attr": {"class": "button orderPopup"}}) }}
+                    {{ form_end(buttons[categoryMeal.MealId]) }}
+                </div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    {% endfor %}
+
+    <div id="insertMealAmount" class="userprofile-form-container" style="width:500px; position:fixed; z-index:999; top:150px; left:0; right:0; margin:auto; padding:0px; border: 3px solid #b3a57a; display:none;">
+        <div style="background:#b3a57a; padding:5px 0px 5px 0px; color:#c3721c; font-size:18px;font-weight:bold">Podaj ilość do zamówienia</div>
+        {{ form_start(orderForm, {"attr": {"style": "padding:20px"}}) }}
+        {{ form_label(orderForm.content) }}
+        {{ form_widget(orderForm.content) }}
+        {{ form_widget(orderForm.save, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+        {{ form_widget(orderForm.close, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+        {{ form_end(orderForm) }}
+    </div>
+{% endblock %}

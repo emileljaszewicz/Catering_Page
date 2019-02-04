@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block content %}
+<div class="contactform-form-container-table">
+    <div class="left-container">
+        {{ form_start(contactForm) }}
+        {{ form_label(contactForm.name) }}
+        {{ form_widget(contactForm.name) }}
+        {{ form_label(contactForm.email) }}
+        {{ form_widget(contactForm.email) }}
+        {{ form_label(contactForm.messagetitle) }}
+        {{ form_widget(contactForm.messagetitle) }}
+        {{ form_label(contactForm.messagedescription) }}
+        {{ form_widget(contactForm.messagedescription) }}
+        {{ form_widget(contactForm.submit, {"attr": {"style": "display:block; margin:20px auto 0px auto", "class": "button"}}) }}
+        {{ form_end(contactForm) }}
+    </div>
+    <div class="right-container">
+        <div style="font-size: 20px; font-weight:bolder; margin-bottom: 20px">Informcje kontaktowe</div>
+        {% for contactfield in contactInformation %}
+            <div class="contact-block">
+                <p>
+                    <div class="field-name">{{ contactfield.ContactPosition }}:</div>
+                    <div class="contact-content">{{ contactfield.ContactDetails }}</div>
+                </p>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
