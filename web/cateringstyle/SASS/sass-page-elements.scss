@@ -1,0 +1,742 @@
+@import "sass-functions.scss";
+
+.context-container{
+  border-bottom:2px solid #a7a7a7;
+  border-right:2px solid #a7a7a7;
+  color: #757373;
+  font-weight: normal;
+  background:#e7dab1;
+  overflow:hidden;
+
+  .container-title{
+    font-size:22px;
+    background:#d3c7a1;
+    padding:5px 0px 5px 0px;
+  }
+  .container-description{
+    margin:0px auto;
+    font-size:15px;
+    line-height: 25px;
+    padding: 0px 20px 20px 20px;
+    img{
+      width: 100%;
+      height:150px;
+      margin-top:10px;
+    }
+  }
+}
+.small-description-container{
+  display:inline-table;
+  width:302px;
+  margin: 20px 30px 10px 0px;
+
+  .description-bar{
+    background:url('../pageimg/content-bar.png');
+    width: 302px;
+    height:43px;
+    line-height:40px;
+    margin: 0px 0px 40px 30px;
+    text-align:left;
+  }
+  .description-bar p{
+    margin-left:20px;
+  }
+  .description img{
+    float:left;
+    margin:0px 10px 0px 0px;
+    padding:0px;
+    width:30%;
+  }
+  .description li{
+    margin:0px 0px 10px 0px;
+  }
+  .description a{
+    color:red;
+  }
+  .description, .contact{
+    padding:15px 15px 0px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+  .contact p{
+    margin-top:5px;
+  }
+
+}
+
+@mixin default-container-description($width, $titlewidth:"auto", $descriptionwidth:"auto"){
+  background:#e7dab1;
+  border: 1px solid #cbbe98;
+  width: $width;
+  .container-title{
+    margin: 0px 0px 0px 0px;
+    width: $titlewidth;
+    background:none;
+  }
+
+  .container-description{
+    font-size: 16px;
+    line-height: 20px;
+    width: $descriptionwidth;
+    .offer-title{
+      text-align:left;
+      margin-bottom:10px;
+      color: #c3721c;
+    }
+  }
+
+}
+@mixin default-page-container($containeroptions:(width:40%), $arraycollumnsproperties:("collumn-name": (width:100%, "options":())))
+{
+  @each $kontainerkey, $kontainervalue in $containeroptions
+  {
+    #{$kontainerkey}:#{$kontainervalue};
+  }
+
+  @each $key, $value in $arraycollumnsproperties
+  {
+    $getwidth: map-get($value, 'width');
+    $getoptions: map-get($value, 'options');
+    .#{$key} {
+      width: #{$getwidth};
+      box-sizing: border-box;
+      @each $optionkey, $optionvalue in $getoptions {
+        #{$optionkey}:#{$optionvalue};
+      }
+    }
+  }
+}
+
+.offer-description{
+  @include default-page-container((
+          width:90%,
+          margin:10px auto 40px auto,
+          background: #e7dab1,
+          border: 1px solid #b3a57a,
+          padding: 15px,
+  ),(
+
+          "container-title": ("options": (
+                  font-size:20px,
+                  font-weight:bold,
+          )),
+          "container-description":("options":(
+                  margin-top:20px,
+          )),
+  ));
+}
+.offer-container{
+  @include default-page-container((
+          width:90%,
+          margin:10px auto,
+          background: #e7dab1,
+          border: 1px solid #b3a57a,
+          padding: 15px,
+  ),(
+
+          "container-title": ("options": (
+                  width:20%,
+                  float:left,
+
+          )),
+          "container-description":("options":(
+                  float:left,
+                  width:80%,
+                  padding: 10px 10px 10px 30px,
+          )),
+  ));
+  .container-title{
+    text-align:center;
+    img{
+      width:200px;
+      height:150px;
+    }
+  }
+  .offer-title{
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:15px;
+  }
+}
+
+.category-container{
+  border: 1px solid #f1820a;
+  font-family: Roboto;
+  background: #e4dabd;
+  display:inline-block;
+  margin-right:10px;
+  margin-bottom:20px;
+  .category-title{
+    font-weight: bold;
+    color: #c3721c;
+    margin:10px 0px 0px 0px;
+    a{
+      color: #c3721c;
+    }
+  }
+  .category-image{
+    width:80%;
+    margin:10px auto;
+    img {
+      width: 100%;
+      height:100%;
+    }
+  }
+  .category-description, .category-info{
+    width:80%;
+    font-size:12px;
+    color:#827f76;
+    margin:10px auto 0px auto;
+    text-align: justify;
+    button{
+      float:right;
+    }
+  }
+  .category-description{
+    height: 50px;
+  }
+  .category-info{
+    b{
+      font-weight: bold;
+    }
+  }
+}
+
+.menu-position-container{
+  @include default-page-container((
+          display:table,
+          width:90%,
+          height:150px,
+          margin:50px auto 10px auto,
+  ),(
+          "container-title": ("options": (
+                  display:table-cell,
+                  width:20%,
+                  vertical-align:middle,
+          )),
+          "container-description": ("options": (
+                  display:table-cell,
+                  width:80%,
+          )),
+  ));
+  .container-title{
+    img{
+      width:200px;
+      height:150px;
+      border: 1px solid #b3a57a;
+    }
+  }
+  .offer-title{
+    display:block;
+    height:20%;
+    background: #e7dab1;
+    padding: 7px 20px 7px 10px;
+    border: 1px solid #b3a57a;
+  }
+  .offer-content{
+    height:55%;
+    padding: 10px;
+  }
+  .order-container{
+    background: #e7dab1;
+    height:25%;
+    display:block;
+    padding: 4px 20px 5px 0px;
+    border: 1px solid #b3a57a;
+    text-align:right;
+  }
+}
+.form-container-1{
+  background:#e7dab1;
+  border:1px solid #b3a57a;
+  padding:15px;
+  label{
+    display:block;
+    text-align:left;
+    font-weight:bold;
+    margin:20px 0px 10px 0px;
+    color:#9a8e67;
+  }
+  input[type="text"]{
+    width:100%;
+    display:block;
+    border:none;
+    margin:0px 0px 10px 0px;
+    padding:2px;
+  }
+  textarea{
+    width: 100%;
+    min-height:200px;
+  }
+  button[type="submit"]{
+    background:#d6ccab;
+    border:1px solid #b3a57a;
+    margin: 30px auto 0px auto;
+    padding:5px 10px 5px 10px;
+  }
+  img{
+    border:1px solid #b3a57a;
+  }
+}
+.admin-menu-container{
+  @include default-page-container(
+                          (width:100%,),
+                  ("kolumna-1":(width:30%,"options":(
+                          float:left,
+                          padding:5px,
+                          background: #ebdeb6,
+                          border-top-left-radius: 0.7vw,
+                          border-bottom-left-radius: 0.7vw,
+                          border-right:1px solid #d2ccb8)),
+                  "kolumna-2":(
+                          width:70%,
+                          "options":(
+                                  float:right,
+                                  padding:5px)))
+  );
+  .kolumna-1{
+    .admin-menu-label{
+      width: 60%;
+      margin: 0px auto 10px auto;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: normal;
+      border-bottom: 1px solid #c3b99a;
+      color: #8d8b86;
+    }
+  }
+  .kolumna-1 a{
+    display:block;
+    color:#ff6600;
+    margin-bottom:7px;
+  }
+  .kolumna-2 a{
+    display:block;
+    margin-bottom:10px;
+  }
+}
+
+.admin-edition-form-container{
+  $border : '1px solid black';
+  $padding : '10px 5px 10px 5px';
+  @include default-page-container((width:90%, text-align:left),(
+          "header": ("options": (
+          display:inline-block,
+          margin-bottom:15px,
+          padding: 10px 20px 10px 20px,
+          border-bottom: 1px solid black,
+          )),
+          "description": ("options": (
+          padding: $padding,
+          margin-bottom:5px,
+          font-size:13px
+          )),
+  ));
+
+  .header a{
+    color: blue;
+    font-size:15px;
+    margin:10px 10px 0px 0px;
+  }
+}
+.admin-offerpage-container{
+  .button{
+    width:100px;
+  }
+  @include default-page-container((
+          width:90%,
+          margin:20px auto 20px auto,
+          text-align:left,),(
+  "desc-container": ("options": (
+  border-bottom: 1px solid #b1b0af,
+  margin-bottom:20px,
+  )),
+  "event": ("options": (
+
+  ))
+  ));
+  .desc-container input[type="text"], textarea{
+    display:block;
+    width:95%;
+    margin:10px auto 15px auto;
+    padding:10px;
+  }
+  .desc-container {
+    img {
+      width: 100px;
+      display: block;
+    }
+  }
+  .event a{
+    color:blue;
+  }
+}
+.admin-newspage-container{
+  @include default-page-container((
+          width:90%,
+          margin:20px auto 20px auto,
+          text-align:left,
+  ),(
+  "field-container": ("options": (
+  padding-bottom: 10px,
+  )),
+  "contact-field": ("options": (
+  float:left,
+  width:30%,
+  text-align:right,
+          margin-right:10%,
+  )),
+  "contact-details": ("options": (
+  float:left,
+  width: 50%,
+  text-align: left,
+  )),
+  "action-button": ("options": (
+  float: left,
+  width: 10%,
+  ))
+  ));
+}
+.userprofile-form-container {
+  background: #e7dab1;
+  border: 1px solid #b3a57a;
+  padding: 15px;
+  @include default-page-container((
+          width:90%,
+          margin:10px auto 10px auto,
+  ),(
+          "left-container": ("options": (
+                  float:left,
+                  width:50%,
+          )),
+          "right-container": ("options": (
+                  float:right,
+                  width:50%,
+          )),
+          "bottom-container": ("options": (
+                  display:block,
+          ))
+  ));
+  .left-container {
+    .avatar-container {
+      img {
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        display: inline-block;
+      }
+    }
+  }
+  .bottom-container{
+    text-align:left;
+    .margins{
+      width:90%;
+      margin:0px auto;
+    }
+    p{
+      float:left;
+    }
+  }
+  label{
+    display:block;
+    text-align:left;
+    font-weight:bold;
+    margin:20px 0px 10px 0px;
+    color:#9a8e67;
+  }
+  input[type="text"], input[type="email"], input[type="text"], input[type="password"], textarea{
+    width: 90%;
+    margin: 0px auto;
+    display: block;
+    padding:5px;
+  }
+  textarea{
+    min-height: 200px;
+  }
+}
+.contactform-form-container-table {
+  display:table;
+  background: #e7dab1;
+  border: 1px solid #b3a57a;
+  padding: 15px;
+  color:#9a8e67;
+  @include default-page-container((
+          width:90%,
+          margin:10px auto 10px auto,
+  ),(
+          "left-container": ("options": (
+                  display:table-cell,
+                  width:60%,
+          )),
+          "right-container": ("options": (
+                  display:table-cell,
+                  width:40%,
+          )),
+  ));
+  .right-container {
+    border-left: 1px solid #b3a57a;
+    .contact-block{
+      display:table;
+      width:100%;
+      p{
+        display:table-row;
+      }
+      .field-name{
+        display: table-cell;
+        width:40%;
+        text-align:right;
+        font-weight:bold;
+        padding:5px 20px 5px 10px;
+      }
+      .contact-content{
+        display: table-cell;
+        width:60%;
+        text-align:left;
+        padding:5px 10px 5px 20px;
+
+      }
+    }
+  }
+  label{
+    display:block;
+    text-align:left;
+    font-weight:bold;
+    margin:20px 0px 10px 0px;
+  }
+  input[type="text"], input[type="email"], textarea{
+    width: 90%;
+    margin: 0px auto;
+    display: block;
+    padding:5px;
+  }
+  textarea{
+    min-height: 200px;
+  }
+}
+.messages-table{
+  display:table;
+  width:90%;
+  margin:10px auto;
+  border-top: 1px solid #9a8e67;
+  border-left: 1px solid #9a8e67;
+  border-right: 1px solid #9a8e67;
+  @include default-page-container((
+          width:95%,
+  ),(
+          "message-from": ("options": (
+                  display:table-cell,
+                  width:25%,
+                  border-bottom: 1px solid #9a8e67,
+                  margin:0px,
+                  padding:0px,
+          )),
+          "message-title": ("options": (
+                  display:table-cell,
+                  width:55%,
+                  border-left: 1px solid #9a8e67,
+                  border-right: 1px solid #9a8e67,
+                  border-bottom: 1px solid #9a8e67,
+                  margin:0px,
+                  padding:0px,
+          )),
+          "message-date":("options":(
+                  display:table-cell,
+                  width:20%,
+                  border-bottom: 1px solid #9a8e67,
+                  margin:0px,
+                  padding:0px,
+          )),
+  ));
+  .table-header-background{
+    background: #e7dab1;
+    padding:20px;
+  }
+  .table-row:hover{
+
+  }
+  .new-message{
+    a{
+      color:blue;
+      display:block;
+      margin:0px;
+      padding:10px;
+    }
+  }
+  .message-received{
+    a{
+      color:#818181;
+      display:block;
+      margin:0px;
+      padding:10px;
+    }
+  }
+
+}
+.message-received-form{
+  @include default-page-container((
+          width:95%,
+          margin:0px auto,
+          background: #e7dab1,
+          border: 1px solid #b3a57a,
+          padding: 15px,
+  ),(
+
+          "message-title": ("options": (
+                  background:white,
+                  border: 1px solid #b3a57a,
+                  margin: 10px auto 0px auto,
+          )),
+          "message-content":("options":(
+                  background:white,
+                  border: 1px solid #b3a57a,
+                  margin: 10px auto 10px auto,
+          )),
+  ));
+
+  .message-title, .message-content, label{
+    width:90%;
+    padding: 10px 15px 10px 15px;
+    text-align:justify;
+  }
+  .message-content{
+    min-height:200px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+  }
+}
+.rank-privileges-form{
+  @include default-page-container((
+          display:table,
+          width:65%,
+          margin:0px auto,
+          padding: 15px,
+  ),(
+
+          "left-container": ("options": (
+                  display:table-cell,
+                  width:50%,
+
+          )),
+          "right-container":("options":(
+                  display:table-cell,
+                  width:50%,
+
+
+          )),
+  ));
+  p{
+    display:table-row;
+  }
+  .left-container, .right-container{
+    padding:5px;
+  }
+  .left-container {
+    a{
+      margin:10px;
+    }
+  }
+  .right-container{
+    a{
+      margin:0px;
+    }
+  }
+}
+
+.shopping-basket-container{
+  @include default-page-container((
+          display:table,
+          width:70%,
+          margin:10px auto 10px auto,
+  ),(
+          "image-container": ("options": (
+                  background:red,
+                  text-align:center,
+                  display:table-cell,
+                  width:30%,
+                  vertical-align:middle,
+                  padding: 10px 0px 10px 0px,
+          )),
+          "meal-info": ("options": (
+                  display:table-cell,
+                  width:60%,
+                  text-align: justify,
+          )),
+          "summary-left": ("options": (
+                  width:30%,
+                  display:table-cell,
+                  vertical-align:middle,
+                  border-left: 1px solid #b3a57a,
+                  border-bottom: 1px solid #b3a57a,
+          )),
+          "summary-right": ("options": (
+                  width:60%,
+                  display:table-cell,
+                  border-bottom: 1px solid #b3a57a,
+                  border-right: 1px solid #b3a57a,
+          ))
+  ));
+  p{
+    display: table-row;
+  }
+  .image-container, .meal-info, .summary-left, .summary-right{
+    background: #e7dab1;
+  }
+  .image-container, .meal-info{
+    border-top: 1px solid #b3a57a;
+    border-bottom: 1px solid #b3a57a;
+  }
+  .image-container{
+    border-left: 1px solid #b3a57a;
+    img{
+      margin: 10px auto 10px auto;
+      height: 80px;
+    }
+  }
+  .meal-info{
+    border-right: 1px solid #b3a57a;
+    .meal-name{
+      width:100%;
+      font-weight:bold;
+      a{
+        display: inline-block;
+        margin: 10px auto 10px auto;
+        font-size: 17px;
+        color: #c3721c;
+      }
+    }
+    .price{
+      width:100%;
+      padding-top: 10px;
+      margin-bottom: 10px;
+      border-top:1px solid silver;
+      font-size: 15px;
+    }
+    .edit{
+      padding-top: 10px;
+      margin-bottom: 10px;
+      border-top:1px solid silver;
+      text-align:right;
+    }
+  }
+  .summary-right{
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align:left;
+    .order-costs{
+      float:left;
+      width:50%;
+      margin-top:8px;
+    }
+    .buttons{
+      float:right;
+      width:50%;
+      text-align:right;
+      button{
+        display:inline-block;
+        margin-right:25px;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+<div class="userprofile-form-container">
+    {{ form_start(form) }}
+    <div class="left-container">
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+        {{ form_label(form.changepassword) }}
+        {{ form_errors(form.changepassword) }}
+        {{ form_widget(form.changepassword) }}
+        {{ form_label(form.confirmpassword) }}
+        {{ form_errors(form.changepassword) }}
+        {{ form_widget(form.confirmpassword, { "attr": {novalidate: 'novalidate'} }) }}
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_label(form.surname) }}
+        {{ form_widget(form.surname) }}
+    </div>
+    <div class="right-container">
+        {{ form_label(form.phonenumber) }}
+        {{ form_widget(form.phonenumber) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+
+        <label>Ranga</label>
+        {{ app.user.rankid.rankname }}
+    </div>
+    <div class="clear-both"></div>
+
+    {{ form_widget(form.submit, {"attr": {"style": "display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

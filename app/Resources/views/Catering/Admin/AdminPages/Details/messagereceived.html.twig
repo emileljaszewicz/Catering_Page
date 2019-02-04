@@ -1,0 +1,11 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="message-received-form">
+        <label class="auto-side-margins"><b class="bold">Wiadomość od:</b> {{ message.Name }}, {{ message.Email }}, {{  message.CreatedAt | date('d-m-Y') }} o godzinie {{  message.CreatedAt | date('H:m') }}</label>
+        <div class="message-title">{{ message.MessageTitle }}</div>
+        <div class="message-content">{{ message.MessageDescription | nl2br}}</div>
+        {{ form_start(removeForm) }}
+        {{ form_widget(removeForm.delete, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+        {{ form_end(removeForm) }}
+    </div>
+{% endblock %}

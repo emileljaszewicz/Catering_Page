@@ -1,0 +1,29 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block content %}
+    <div class="offer-container auto-side-margins text-justify">
+        <div class="container-title" >
+            <img src="{{ asset(aboutcompany.imageid | getImgName) }}" />
+        </div>
+        <div class="container-description">
+            <div class="offer-title">{{ aboutcompany.abouttitle }}</div>
+            {{ aboutcompany.aboutdescription }}
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    <div class="align-right auto-side-margins" style="width:85%; margin-top:15px; margin-bottom:15px">
+        {{ form_start(editform, {"attr": {"class": "inline-block","style": "margin-right:10px"}}) }}
+        {{ form_widget(editform.submit, {"attr": {"class": "button"}}) }}
+        {{ form_rest(editform) }}
+        {{ form_end(editform) }}
+
+        {{ form_start(deleteform, {"attr": {"class": "inline-block", "style": "margin-right:10px"}}) }}
+        {{ form_widget(deleteform.submit, {"attr": {"class": "button"}}) }}
+        {{ form_rest(deleteform) }}
+        {{ form_end(deleteform) }}
+
+        {{ form_start(returnform, {"attr": {"class": "inline-block"}}) }}
+        {{ form_widget(returnform.submit, {"attr": {"class": "button"}}) }}
+        {{ form_rest(returnform) }}
+        {{ form_end(returnform) }}
+    </div>
+{% endblock %}

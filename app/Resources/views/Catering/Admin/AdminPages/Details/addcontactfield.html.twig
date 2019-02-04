@@ -1,0 +1,10 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    {{ form_start(contactform) }}
+    {{ form_label(contactform.contactposition) }}
+    {{ form_widget(contactform.contactposition) }}
+    {{ form_label(contactform.contactdetails) }}
+    {{ form_widget(contactform.contactdetails) }}
+    {{ form_widget(contactform.submit) }}
+    {{ form_end(contactform) }}
+{% endblock %}

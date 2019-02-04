@@ -1,0 +1,30 @@
+<div class="admin-menu-label">Strony</div>
+{% for userlinks in loggeduserentityroutes.pages %}
+    {% if userlinks.requestRoute ==  userlinks.route %}
+        {% set zmienna = 'style=font-weight:bold' %}
+    {% else %}
+        {% set zmienna = null %}
+    {% endif %}
+
+   <a href="{{ path(userlinks.route) }}" {{ zmienna }}>{{  userlinks.name }}</a>
+
+{% else %}
+    <div style="margin:10px auto 10px auto">brak ustawień</div>
+{% endfor %}
+<div class="admin-menu-label">Ustawienia</div>
+
+{% for usersettingslinks in loggeduserentityroutes.settings %}
+
+    {% if usersettingslinks.requestRoute ==  usersettingslinks.route %}
+    {% set zmienna = 'style=font-weight:bold' %}
+    {% else %}
+        {% set zmienna = null %}
+    {% endif %}
+
+        <a href="{{ path(usersettingslinks.route) }}" {{ zmienna }}>{{  usersettingslinks.name }}</a>
+
+
+{% else %}
+    <div style="margin:10px auto 10px auto">brak ustawień</div>
+{% endfor %}
+<a href="{{ path("user_edit_userprofile", {"id": app.user.userid}) }}">Edytuj profil</a>

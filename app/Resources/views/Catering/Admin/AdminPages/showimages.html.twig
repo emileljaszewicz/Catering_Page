@@ -1,0 +1,23 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    {{ form_start(imagesform,  {"attr": {"style": "margin:10px auto 20px auto;"}}, {'action': path('admin_images_show'), 'method': 'POST'}) }}
+    {{ form_label(imagesform.imgname) }}
+    {{ form_widget(imagesform.imgname) }}
+    {{ form_widget(imagesform.submit) }}
+    {{ form_end(imagesform) }}
+    <div class="page-dotted-separator auto-side-margins" style="margin-bottom:20px"></div>
+    {% for pageimage in pageimages %}
+        <div class="category-container" style="width: 200px;height:180px;">
+            <div style="margin-top:5px">{{ pageimage.ImgName }}</div>
+            <div class="category-image" style="height: 100px;">
+                <img src="{{ asset('webimages/') ~ pageimage.HashName }}" width="150px"/>
+            </div>
+            <div class="category-info">
+                {{ form_start(deletebutton[pageimage.ImageId], {'action': path('image_delete', {'id': pageimage.ImageId}), 'method': 'POST'}) }}
+                {{ form_widget(deletebutton[pageimage.ImageId].delete, {"attr": {"class": "button"}}) }}
+                {{ form_end(deletebutton[pageimage.ImageId]) }}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

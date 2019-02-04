@@ -1,0 +1,16 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block content %}
+    <div class="form-container-1 auto-side-margins" style="width:50%; margin-top: 20px; margin-bottom: 20px;">
+    {{ form_start(form) }}
+    {{ form_label(form.abouttitle) }}
+    {{ form_widget(form.abouttitle) }}
+    {{ form_label(form.aboutdescription) }}
+    {{ form_widget(form.aboutdescription) }}
+    {{ form_label(form.imageid) }}
+    {{ form_widget(form.imageid) }}
+    <label>Aktualne zdjęcie</label>
+    <img src="{{ asset(image | getImgName) }}" style="width:100px"/>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

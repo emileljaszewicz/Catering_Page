@@ -1,0 +1,43 @@
+@import "sass-page-elements.css";
+@import "data-format.css";
+input[type="text"], input[type="email"], textarea{
+    color: #777674;
+}
+.table-row{
+    display: table-row;
+}
+.table-cell{
+    display: table-cell;
+}
+.vertical-align{
+    vertical-align: middle;
+}
+.text-justify{
+    text-align: justify;
+}
+.page-separator{
+    height:1px;
+    width:60%;
+    border-top:1px solid #c8c7c5;
+}
+.page-dotted-separator{
+    height:1px;
+    width:60%;
+    border-top:2px dotted #c8c7c5;
+}
+.date{
+    font-family: "Helvetica Neue";
+    font-size:10px;
+    margin:0px 0px 5px 0px;
+    color:#b4b4b4;
+}
+.button{
+    background:#e7dab1;
+    border: 1px solid #cbbe98;
+    padding: 5px 10px 5px 10px;
+    margin:0px;
+    display:inline;
+    color:#ff6600;
+}
+
+

@@ -1,0 +1,87 @@
+@import url("reset.css");
+
+@font-face{
+    font-family: 'Helvetica Neue';
+    src: url(../fonts/Helvetica-neue/HelveticaNeue.ttf);
+    font-weight: normal;
+}
+body{
+    background:url(../pageimg/bg.jpg);
+    background-attachment: fixed;
+    width:100%;
+    overflow-x: hidden;
+}
+@media only screen and (max-width: 600px) {
+    .page-container {
+        width: 98%;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .page-container {
+        width: 95%;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    .page-container {
+        width: 90%;
+    }
+}
+.page-container{
+    margin: 40px auto 10px auto;
+    min-width:400px;
+}
+@media only screen and (max-width: 600px) {
+    .banner img{
+        height:200px;
+    }
+}
+@media only screen and (min-width: 1100px) {
+    .banner img{
+        height:350px;
+    }
+}
+.banner img{
+    width:100%;
+    border-radius: 0.4vw;
+}
+.menu{
+    margin: 15px 0px 0px 0px;
+    background:rgba(251,237,194,1);
+    border: solid 1px #f1820a;
+    border-radius: 0.7vw;
+    padding: 10px 5px 15px 10px;
+
+}
+@media only screen and (min-width: 600px) {
+    .menu a {
+        font-size: 25px;
+        margin-left: 15px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .menu a{
+        display:block;
+        text-align:center;
+        border-bottom: 1px solid #cdcdcd;
+        padding:0px 0px 5px 0px;
+        font-size:20px;
+    }
+}
+.menu a{
+    font-family: Vijaya;
+    color:#ff6600;
+}
+.content{
+    margin-top: 15px;
+    border: solid 1px #f1820a;
+    border-radius: 0.7vw;
+    background:rgba(251,237,194,1);
+    text-align:center;
+}
+.subpage-content{
+    padding:0px 0px 0px 0px;
+    font-family: 'Helvetica Neue';
+    font-size:15px;
+    color:#5a5a5a;
+    margin: 0px auto;
+}

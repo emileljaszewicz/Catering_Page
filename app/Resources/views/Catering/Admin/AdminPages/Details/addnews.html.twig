@@ -1,0 +1,21 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="admin-offerpage-container">
+        <div class="desc-container">
+            {{ form_start(form) }}
+            {{ form_label(form.newstitle) }}
+            {{ form_widget(form.newstitle) }}
+            {{ form_label(form.newsdescription) }}
+            {{ form_widget(form.newsdescription) }}
+            {% if image is defined%}
+                <label>Aktualne zdjęcie</label>
+            <img src="{{ asset(image.ImageId | getImgName) }}" style="width:100px"/>
+            {% endif %}
+            {{ form_widget(form.submit, {"attr": {"class": "button", "style": "float:left"}}) }}
+            {{ form_end(form) }}
+            {{ form_start(backbutton) }}
+            {{ form_widget(backbutton.submit, {"attr": {"class": "button", "style": "float:left"}}) }}
+            {{ form_end(backbutton) }}
+        </div>
+    </div>
+{% endblock %}

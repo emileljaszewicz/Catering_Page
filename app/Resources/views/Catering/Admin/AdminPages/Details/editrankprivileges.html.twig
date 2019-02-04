@@ -1,0 +1,32 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+        <div class="userprofile-form-container">
+
+
+
+        <label> Indywidualne uprawnienia dla rangi <b class="bold">{{ rankname.rankname }}</b></label>
+        {{ form_start(form) }}
+                {{ form_label(form.routeid) }}
+                {{ form_widget(form.routeid) }}
+                {{ form_widget(form.submit, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+
+<div class="page-dotted-separator" style="margin:20px auto 20px auto"></div>
+        <div class="rank-privileges-form">
+                {% for userroute in rankprivileges.pages %}
+                        <p>
+                        <div class="left-container">{{ userroute.name }}</div>
+                        <div class="right-container"><a href="{{ url("userranks_rankgrantedroute_delete", {"pageroutes": userroute.id, "userranks": rankname.rankid}) }}" >usuń</a></div>
+                        </p>
+                {% endfor %}
+                {% for userroute in rankprivileges.settings %}
+                        <p>
+                        <div class="left-container">{{ userroute.name }}</div>
+                        <div class="right-container"><a href="{{ url("userranks_rankgrantedroute_delete", {"pageroutes": userroute.id, "userranks": rankname.rankid}) }}" >usuń</a></div>
+                        </p>
+
+                {% endfor %}
+        </div>
+                {{ form_widget(form.delete, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+                {{ form_end(form) }}
+        </div>
+{% endblock %}

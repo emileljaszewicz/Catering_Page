@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="offer-description auto-side-margins text-justify" style="margin-bottom: 40px;">
+        <div class="container-title">
+            Nasze menu
+        </div>
+        <div class="container-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+        </div>
+    </div>
+
+
+    {% for menuCategory in menuCategories %}
+        <div class="category-container" style="width: 300px;height:280px;">
+            <div class="category-title" style="font-size:20px;"><a href="{{ url("categories_show", {"id": menuCategory.CategoryId,}) }}">{{ menuCategory.CategoryName }}</a></div>
+            <div class="category-image" style="height: 150px;">
+                <img src="{{ menuCategory.imageid | getImgName }}" />
+            </div>
+            <div class="category-description">
+                {{ menuCategory.CategoryDescription }}
+            </div>
+            <div class="category-info">
+                Pozycji: <b>{{ menuCategory.CategoryId | countOFMeals }}</b>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

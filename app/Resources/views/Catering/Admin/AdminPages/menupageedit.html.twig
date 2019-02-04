@@ -1,0 +1,18 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    {% for menucategory in menucategories %}
+    <div class="category-container" style="width: 200px;height:180px;">
+        <a href="{{ url("menupage_menucategory_show", {"id": menucategory.CategoryId}) }}" class="category-title" style="font-size:15px;">{{ menucategory.CategoryName }}</a>
+        <div class="category-image" style="height: 100px;">
+            <img src="{{ asset(menucategory.ImageId | getImgName) }}"/>
+        </div>
+        <div class="category-info">
+            <a href="{{ url("menupage_menucategory_edit", {"id": menucategory.CategoryId}) }}" class="button" style="display:inline; float:right">edytuj</a>
+        </div>
+    </div>
+        {% endfor %}
+    <div style="width:90%" class="auto-side-margins">
+    <a href="{{ url("menupage_menucategory_add") }}" class="button" style="width:150px; margin:0px auto 0px 0px">Dodaj kategorię</a>
+    </div>
+
+{% endblock %}

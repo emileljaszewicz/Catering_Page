@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="offer-description auto-side-margins text-justify">
+        <div class="container-title">
+            {{ pageDescription.Title }}
+        </div>
+        <div class="container-description">
+            {{ pageDescription.Description }}
+        </div>
+    </div>
+
+    {% for news in allNews %}
+    <div class="menu-position-container auto-side-margins text-justify" >
+        <div class="container-title">
+            <img src="{{ asset( news.ImageId | getImgName ) }}"/>
+        </div>
+        <div class="container-description">
+            <div class="offer-title"><p style="width:70%; " class="inline-block">{{ news.NewsTitle }}</p>
+                <p style="width:28%; font-size:12px;" class="inline-block align-right date">{{ news.AdditionDate | date("d-m-Y")}}</p></div>
+            <div class="offer-content" style="height:80%">{{ news.NewsDescription }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="page-dotted-separator auto-side-margins" style="width:90%; margin-top:0px; padding:0px;"></div>
+{% endblock %}

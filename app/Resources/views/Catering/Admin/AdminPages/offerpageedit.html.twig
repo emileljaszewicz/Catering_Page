@@ -1,0 +1,24 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+<div class="admin-offerpage-container">
+    {% if pagedescription is not empty %}
+        <div class="desc-container">
+            <div class="container-title">
+                {{ pagedescription.Title }}
+            </div>
+            <div class="container-description">
+                {{ pagedescription.Description }}
+            </div>
+            <a href="{{ url("offerpage_description_edit", {"id": pagedescription.DescriptionId}) }}" class="button align-center">Edytuj</a>
+        </div>
+    {% else %}
+        <a href="{{ url("offerpage_description_add") }}" class="button align-center">Dodaj opis</a>
+    {% endif %}
+    {% for range in activityrange %}
+    <div class="event">
+        <a href="{{ url("offerpage_activity_edit", {"id": range.ActivityRangeId}) }}">{{ range.ActivityTitle }}</a>
+    </div>
+        {% endfor %}
+    <a href="{{ url("offerpage_activity_add") }}" class="button align-center" style="width:150px; float:right">Dodaj zakres</a>
+</div>
+{% endblock %}

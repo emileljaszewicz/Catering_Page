@@ -1,0 +1,17 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="messages-table">
+        <div class="table-row">
+        <div class="message-from bold table-header-background">Wiadomość od</div>
+        <div class="message-title bold table-header-background">Tytuł wiadomości</div>
+        <div class="message-date bold table-header-background">Data wysłania</div>
+        </div>
+        {% for message in messages %}
+        <div class="table-row {{ message | createMessageField }}">
+            <div class="message-from {{ message | createMessageField }}"><a href="{{ url('customersmessages_message_show', {'id': message.MessageId}) }}">{{ message.Name }}</a></div>
+            <div class="message-title {{ message | createMessageField }}"><a href="{{ url('customersmessages_message_show', {'id': message.MessageId}) }}">{{ message.MessageTitle }}</a></div>
+            <div class="message-date {{ message | createMessageField }}"><a href="{{ url('customersmessages_message_show', {'id': message.MessageId}) }}">{{  message.CreatedAt | date('d-m-Y') }}</a></div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

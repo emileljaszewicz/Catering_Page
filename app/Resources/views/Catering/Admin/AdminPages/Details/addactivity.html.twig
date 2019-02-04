@@ -1,0 +1,17 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="admin-offerpage-container">
+        <div class="desc-container">
+            {{ form_start(form) }}
+            {{ form_label(form.activitytitle) }}
+            {{ form_widget(form.activitytitle) }}
+            {{ form_label(form.activitydescription) }}
+            {{ form_widget(form.activitydescription) }}
+            {{ form_widget(form.submit, {"attr": {"class": "button", "style": "float:left"}}) }}
+            {{ form_end(form) }}
+            {{ form_start(backbutton) }}
+            {{ form_widget(backbutton.submit, {"attr": {"class": "button", "style": "float:left"}}) }}
+            {{ form_end(backbutton) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,5 @@
+do zrobienia:
+dodawanie,edycja,usuwanie rang
+hashowanie, usuwanie zdjêæ
+usuwanie kategorii dañ, pozycji menu kategorii dañ i innych
+reset has³a u¿ytkownika/wysy³ka email przy dodawaniu nowego u¿ytkownika

@@ -1,0 +1,7 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    {% for userrank in userranks %}
+        <a href="{{ url("userranks_rank_edit", {"id": userrank.RankId}) }}">{{ userrank.RankName }}</a>
+    {% endfor %}
+    <a href="{{ url("userranks_rank_add") }}" class="button" style="width:200px">Dodaj rangę użytkownika</a>
+{% endblock %}

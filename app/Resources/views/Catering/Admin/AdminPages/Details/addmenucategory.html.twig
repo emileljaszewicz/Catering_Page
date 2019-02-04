@@ -1,0 +1,19 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block content %}
+    <div class="form-container-1 auto-side-margins" style="width:50%; margin-top: 20px; margin-bottom: 20px;">
+        {{ form_start(form) }}
+        {{ form_label(form.categoryname) }}
+        {{ form_widget(form.categoryname) }}
+        {{ form_label(form.categorydescription) }}
+        {{ form_widget(form.categorydescription) }}
+        {% if menucategories is defined %}
+            <label>Aktualne zdjęcie</label>
+            <img src="{{ asset(menucategories.ImageId | getImgName) }}" style="width:100px"/>
+        {% endif %}
+        {{ form_label(form.imageid) }}
+        {{ form_widget(form.imageid, {"attr": {"style": "display:block; margin:0px auto"}}) }}
+        {{ form_widget(form.submit) }}
+        <a href="{{ url("admin_edit_menupage") }}" class="button inline-block">Powrót</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="offer-description auto-side-margins text-justify">
+        <div class="container-title">
+           {{ pageDescription.Title }}
+        </div>
+        <div class="container-description">
+            {{ pageDescription.Description }}
+        </div>
+    </div>
+    {% for activityData in activityRange %}
+    <div class="offer-container auto-side-margins text-justify">
+        <div class="container-title" >
+            {% if activityData.ImageId is not null %}
+            <img src="{{ asset( activityData.imageid | getImgName) }}" />
+            {% else %}
+                no img
+            {% endif %}
+        </div>
+        <div class="container-description">
+            <div class="offer-title">{{ activityData.ActivityTitle }}</div>
+            {{ activityData.ActivityDescription }}
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    {% endfor %}
+{% endblock %}

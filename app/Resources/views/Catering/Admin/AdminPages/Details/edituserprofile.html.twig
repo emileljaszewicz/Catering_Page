@@ -1,0 +1,47 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+<div class="userprofile-form-container">
+    {{ form_start(form) }}
+    <div class="left-container">
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+        <label>Resetuj hasło</label>
+        {{ form_widget(form.resetpassword, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_label(form.usergrantedroutes) }}
+        {{ form_widget(form.usergrantedroutes) }}
+    </div>
+    <div class="right-container">
+        {{ form_label(form.phonenumber) }}
+        {{ form_widget(form.phonenumber) }}
+        {{ form_label(form.surname) }}
+        {{ form_widget(form.surname) }}
+        {{ form_label(form.rankid) }}
+        {{ form_widget(form.rankid) }}
+    </div>
+    <div class="clear-both"></div>
+    <div class="bottom-container">
+        <label> Indywidualne uprawnienia</label>
+            
+        <div class="margins">
+            {% for userroute in usergrantedroutes.pages %}
+                <p style="width:50%">{{ userroute.name }}</p>
+                <a href="{{ url("userspage_userroute_delete", {"pageroutes": userroute.id, "users": userdata.userid}) }}">usuń</a>
+            {% endfor %}
+            {% for userroute in usergrantedroutes.settings %}
+                <p style="width:50%">{{ userroute.name }}</p>
+                <p style="width:50%">
+                    <a href="{{ userroute.id }}">usuń</a>
+                </p>
+            {% endfor %}
+        </div>
+
+    </div>
+    {{ form_widget(form.submit, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+    {{ form_widget(form.delete, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

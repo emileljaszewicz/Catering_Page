@@ -1,0 +1,24 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+<div class="admin-offerpage-container">
+    {% if pagedescription is not empty %}
+        <div class="desc-container">
+            <div class="container-title">
+                {{ pagedescription.Title }}
+            </div>
+            <div class="container-description">
+                {{ pagedescription.Description }}
+            </div>
+            <a href="{{ url("newspage_description_edit", {"id": pagedescription.DescriptionId}) }}" class="button align-center">Edytuj</a>
+        </div>
+    {% else %}
+        <a href="{{ url("newspage_description_add") }}" class="button align-center">Dodaj opis</a>
+    {% endif %}
+    {% for shownews in news %}
+    <div class="event">
+        <a href="{{ url("newspage_news_edit", {"id": shownews.NewsId}) }}">{{ shownews.NewsTitle }}</a>
+    </div>
+        {% endfor %}
+    <a href="{{ url("newspage_news_add") }}" class="button align-center" style="width:150px; float:right">Dodaj newsa</a>
+</div>
+{% endblock %}

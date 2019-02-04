@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAK,CACH,WAAW,CAAE,IAAI",
+"sources": ["../SASS/data-format.scss"],
+"names": [],
+"file": "data-format.css"
+}

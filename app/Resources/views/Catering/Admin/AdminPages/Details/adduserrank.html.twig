@@ -1,0 +1,11 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="userprofile-form-container">
+    {{ form_start(form) }}
+        {{ form_label(form.rankname) }}
+        {{ form_widget(form.rankname) }}
+    {{ form_widget(form.submit, {"attr": {"style": "background:rgba(251,237,194,1);display:inline-block; margin:20px auto 0px auto", "class": "button"}}) }}
+        <a href="{{ url("admin_userranks_show") }}" class="button" style="display:inline-block; background:rgba(251,237,194,1)">Anuluj</a>
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

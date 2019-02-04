@@ -1,0 +1,7 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    {% for user in users %}
+        <a href="{{ url("userspage_user_edit", {"id": user.UserId}) }}">{{ user.Name }} {{ user.SurName }}</a>
+    {% endfor %}
+    <a href="{{ url("userspage_user_add") }}" class="button" style="width:150px">Dodaj użytkownika</a>
+{% endblock %}

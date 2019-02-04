@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="description" content="Catering web page">
+<meta name="author" content="Emil eljaszewicz">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('cateringstyle/CSS/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('cateringstyle/CSS/positioning.css') }}" />
+        <link rel="stylesheet" href="{{ asset('cateringstyle/CSS/page-elements.css') }}" />
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {% endblock %}
+    {% block otherjavascripts %}<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+<div class="page-container">
+    <div class="banner">
+        {% block banner %}
+            <img src="{{ asset('cateringstyle/pageimg/banner.jpg') }}">
+        {% endblock %}
+    </div>
+    <div class="menu auto-side-margins align-center">
+            <a href="{{ url("homepage") }}">Home</a>
+            <a href="{{ url("view_offer") }}">Oferta</a>
+            <a href="{{ url("categories") }}">Menu</a>
+            <a href="{{ url("show_news") }}">Aktualności</a>
+            <a href="{{ url("contact_form") }}">Kontakt</a>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ url("admin_index") }}">Ustawienia</a>
+        {% endif %}
+        {% if app.session.get('basketProducts')%}
+            <a href="{{ url("shoppingbasket_order_show") }}">Twój koszyk</a> <div id="productAmount" style="display:inline-block">{{ app.session.get('basketProducts') | countOfProducts }}</div>
+        {% endif %}
+    </div>
+    <div class="content">
+        <div class="subpage-content">
+            {% for message in app.flashes("success") %}
+                {{ message }}
+            {% endfor %}
+
+            {% for message in app.flashes("error") %}
+             {{ message }}
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

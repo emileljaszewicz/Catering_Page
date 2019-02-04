@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="admin-menu-container">
+        <div class="kolumna-1">
+            {{render(controller('AppBundle:LoggedUserMenu:showUserMenu'))}}
+        </div>
+        <div class="kolumna-2">
+            {% block userdata %}{% endblock %}
+        </div>
+        <div class="clear-both"></div>
+    </div>
+{% endblock %}

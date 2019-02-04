@@ -1,0 +1,11 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+<div class="admin-offerpage-container">
+    {% for categorymeal in category %}
+    <div class="event">
+        <a href="{{ url("menupage_menucategory_meal_show", {"categoryid": catid.CategoryId, "mealid": categorymeal.mealid}) }}">{{ categorymeal.MealName }}</a>
+    </div>
+        {% endfor %}
+    <a href="{{ url("menupage_menucategory_meal_add", {"id": catid.CategoryId}) }}" class="button align-center" style="width:150px; float:right">Dodaj danie</a>
+</div>
+{% endblock %}

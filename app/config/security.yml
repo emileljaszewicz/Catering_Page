@@ -1,0 +1,22 @@
+security:
+    encoders:
+        AppBundle\Entity\Users:
+            algorithm: bcrypt
+
+    providers:
+        our_db_provider:
+            entity:
+                class: AppBundle:Users
+
+    firewalls:
+        main:
+            anonymous: ~
+            http_basic: ~
+            provider: our_db_provider
+            form_login:
+                login_path: login_action
+                check_path: login_action
+
+    access_control:
+            # require ROLE_ADMIN for /admin*
+            - { path: ^/admin, roles: ROLE_USER }

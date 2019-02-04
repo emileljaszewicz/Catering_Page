@@ -1,0 +1,14 @@
+{% extends "Catering/Admin/adminindex.html.twig" %}
+{% block userdata %}
+    <div class="admin-newspage-container auto-side-margins">
+    {% for contactfield in companycontact %}
+        <div class="field-container">
+    <div class="contact-field">{{ contactfield.ContactPosition }}: </div>
+    <div class="contact-details">{{ contactfield.ContactDetails }} </div>
+    <div class="action-button"><a href="{{ url("contactpage_contactfield_edit", {"id": contactfield.PositionId}) }}" class="button align-center">edytuj</a></div>
+            <div class="clear-both"></div>
+        </div>
+    {% endfor %}
+        <a href="{{ url("contactpage_contactfield_add") }}" class="button align-center" style="width:150px;clear:both">Dodaj pole</a>
+    </div>
+{% endblock %}

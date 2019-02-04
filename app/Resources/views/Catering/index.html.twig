@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    {% for about in aboutcompany %}
+    <div class="context-container inline-block" style="width:300px;height:500px;margin:30px 20px 0px 0px;">
+        <div class="table-row">
+            <div class="container-title table-cell vertical-align">{{ about.abouttitle }}</div>
+        </div>
+        <div class="table-row">
+            <div class="container-description table-cell text-justify">
+                <img class="auto-side-margins" src=" {{ about.imageid | getImgName }}" />
+                {{ about.aboutdescription }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="page-separator auto-side-margins" style="margin-top:40px; margin-bottom:20px;"></div>
+
+    <div class="small-description-container">
+        <div class="table-row">
+            <div class="description-bar table-cell">
+                <p>Polecane danie dnia:</p>
+            </div>
+        </div>
+        <div class="table-row">
+            <div class="description table-cell text-justify">
+                <img src="{{ asset('cateringstyle/pageimg/kat2.jpg') }}">
+                Sed ut volupt ;kdfmf kkffkdjfkfjf atem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo
+                <a href="#">czytaj więcej</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="small-description-container">
+        <div class="table-row">
+            <div class="description-bar table-cell">
+                <p>Najnowsze ogłoszenia:</p>
+            </div>
+        </div>
+        <div class="table-row">
+            <div class="description table-cell text-justify">
+                <ul>
+                    <li>
+                        <p class="date align-right">2018-05-20 20:25</p>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo
+                        </p>
+                    </li>
+                    <li>
+                        <p class="date align-right">2018-05-20 20:25</p>
+                        <p>
+                            dsdssd owekowekweo odksosdksdosdkosd
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="small-description-container">
+        <div class="table-row">
+            <div class="description-bar table-cell">
+                <p>Skontaktuj się z nami:</p>
+            </div>
+        </div>
+        <div class="table-row">
+            <ul>
+                <li>
+                    <div class="contact table-cell text-justify">
+                        <p>Jakaś Restauracja & Cafe-Bistro</p>
+                        <p>ul.Dzielna 1, 50-651 Wrocław</p>
+                        <p>tel. Restauracja 71 265 12 34</p>
+                        <p>tel. Cafe-Bistro 71 265 01 22</p>
+                        <p>jakas@restauracja.pl</p>
+                        <p>facebook: Jakaś Restauracja & Cafe-Bistro</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
