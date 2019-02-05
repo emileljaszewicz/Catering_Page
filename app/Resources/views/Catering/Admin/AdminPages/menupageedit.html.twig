@@ -1,5 +1,24 @@
 {% extends "Catering/Admin/adminindex.html.twig" %}
 {% block userdata %}
+    {% if pagedescription is not empty %}
+        <div class="offer-container auto-side-margins text-justify">
+            <div class="container-description">
+                <div class="offer-title"> {{ pagedescription.Title }}</div>
+                {{ pagedescription.Description }}
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="align-right auto-side-margins" style="width:90%; margin-top:15px; margin-bottom:15px">
+            {{ form_start(deleteform, {"attr": {"class": "inline-block", "style": "margin-right:10px"}}) }}
+            {{ form_widget(deleteform.deleteDescription, {"attr": {"class": "button"}}) }}
+            {{ form_rest(deleteform) }}
+            {{ form_end(deleteform) }}
+            <a href="{{ url("menu_description_edit", {"id": pagedescription.DescriptionId}) }}" class="button inline-block align-center" style="float:right;width:50px">Edytuj</a>
+        </div>
+        <div class="clear-both"></div>
+    {% else %}
+        <a href="{{ url("menupage_description_add") }}" class="button align-center" style="margin:20px auto 60px 40px;width:100px">Dodaj opis</a>
+    {% endif %}
     {% for menucategory in menucategories %}
     <div class="category-container" style="width: 200px;height:180px;">
         <a href="{{ url("menupage_menucategory_show", {"id": menucategory.CategoryId}) }}" class="category-title" style="font-size:15px;">{{ menucategory.CategoryName }}</a>

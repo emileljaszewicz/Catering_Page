@@ -171,7 +171,10 @@ class AdminEditActionsController extends Controller
             return $this->redirectToRoute("offerpage_description_edit", ["id" => $getPageDescription->getDescriptionid()]);
         }
         $form = $this->createForm(OfferPageType::class, $pagedescription);
-
+        $backbutton = $this->createFormBuilder()
+            ->setAction($this->generateUrl("admin_edit_offerpage"))
+            ->add('submit', SubmitType::class, ["label" => "powrót"])
+            ->getForm();
         if($request->isMethod("POST"))
         {
             $form->handleRequest($request);
@@ -182,6 +185,7 @@ class AdminEditActionsController extends Controller
         }
         return $this->render($this->path . 'editofferpagedescription.html.twig',[
             "form" => $form->createView(),
+            "backbutton" => $backbutton->createView(),
         ]);
     }
 
@@ -259,6 +263,68 @@ class AdminEditActionsController extends Controller
         return $this->render($this->path . 'editactivity.html.twig',[
             "form" => $form->createView(),
             "image" => $activityrange,
+        ]);
+    }
+    /**
+     * @Route("/admin/menupage/description/add", name="menupage_description_add")
+     *
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function menuPageDescriptionAddAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "admin_edit_menupage"]);
+        $pagedescription = new Pagedescription();
+
+        if($getPageDescription instanceof $pagedescription){
+            return $this->redirectToRoute("offerpage_description_edit", ["id" => $getPageDescription->getDescriptionid()]);
+        }
+        $form = $this->createForm(OfferPageType::class, $pagedescription);
+        $backbutton = $this->createFormBuilder()
+            ->setAction($this->generateUrl("admin_edit_menupage"))
+            ->add('submit', SubmitType::class, ["label" => "powrót"])
+            ->getForm();
+
+        if($request->isMethod("POST"))
+        {
+            $form->handleRequest($request);
+            $pagedescription->setRoutename("admin_edit_menupage");
+            $entityManager->persist($pagedescription);
+            $entityManager->flush();
+            $this->addFlash('success', "Dodano opis strony");
+        }
+        return $this->render($this->path . 'editofferpagedescription.html.twig',[
+            "form" => $form->createView(),
+            "backbutton" => $backbutton->createView(),
+        ]);
+    }
+    /**
+     * @Route("/admin/menupage/description/edit/{id}", name="menu_description_edit")
+     *
+     * @param Request $request
+     * @param Pagedescription $pagedescription
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function menuPageDescriptionEditAction(Request $request, Pagedescription $pagedescription)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(OfferPageType::class, $pagedescription);
+        $backbutton = $this->createFormBuilder()
+            ->setAction($this->generateUrl("admin_edit_menupage"))
+            ->add('submit', SubmitType::class, ["label" => "powrót"])
+            ->getForm();
+        if($request->isMethod('post')){
+            $form->handleRequest($request);
+            $entityManager->persist($pagedescription);
+            $entityManager->flush();
+            $this->addFlash('success', "Zaktualizowano dane");
+        }
+        return $this->render($this->path . 'editofferpagedescription.html.twig',[
+            "form" => $form->createView(),
+            "backbutton" => $backbutton->createView(),
         ]);
     }
 
@@ -435,6 +501,7 @@ class AdminEditActionsController extends Controller
             ->setAction($this->generateUrl("admin_edit_newspage"))
             ->add('submit', SubmitType::class, ["label" => "powrót"])
             ->getForm();
+
         if($request->isMethod('post')){
             $form->handleRequest($request);
             $entityManager->persist($pagedescription);

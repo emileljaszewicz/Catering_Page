@@ -1,18 +1,25 @@
-.align-center{
-  text-align:center;
+.align-center {
+  text-align: center;
 }
-.align-right{
-  text-align:right;
+
+.align-right {
+  text-align: right;
 }
-.auto-side-margins{
-  margin: 0px auto 0px auto
+
+.auto-side-margins {
+  margin: 0px auto;
 }
-.clear-both{
+
+.clear-both {
   clear: both;
 }
-.inline-block{
-  display:inline-block;
+
+.inline-block {
+  display: inline-block;
 }
-.inline-table{
+
+.inline-table {
   display: inline-table;
 }
+
+/*# sourceMappingURL=positioning.css.map */

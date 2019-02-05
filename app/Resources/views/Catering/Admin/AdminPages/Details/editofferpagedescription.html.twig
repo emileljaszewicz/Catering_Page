@@ -8,8 +8,10 @@
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
             {{ form_widget(form.submit, {"attr": {"class": "button", "style": "float:left"}}) }}
-            <a href="{{ url("admin_edit_offerpage") }}" class="button align-center" style="display:inline">Powrót</a>
             {{ form_end(form) }}
+            {{ form_start(backbutton) }}
+            {{ form_widget(backbutton.submit) }}
+            {{ form_end(backbutton) }}
         </div>
     </div>
 {% endblock %}

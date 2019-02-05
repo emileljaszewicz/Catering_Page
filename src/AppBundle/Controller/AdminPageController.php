@@ -83,13 +83,19 @@ class AdminPageController extends Controller
      */
     public function OfferPageEditAction(Request $request)
     {
-       // $routename = $request->attributes->get('_route');
+
         $entityManager = $this->getDoctrine()->getManager();
         $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "view_offer"]);
         $getActivityRange = $entityManager->getRepository(Activityrange::class)->findAll();
         $deleteForm = $this->createFormBuilder()
             ->add('deleteDescription', SubmitType::class, ["label" => "usuń"])
             ->getForm();
+        $deleteForm->handleRequest($request);
+        if($deleteForm->isSubmitted() && $deleteForm->get('deleteDescription')->isClicked()){
+            $entityManager->remove($getPageDescription);
+            $entityManager->flush();
+            return $this->redirectToRoute("admin_edit_offerpage");
+        }
         return $this->render($this->path . 'offerpageedit.html.twig',[
             "pagedescription" => $getPageDescription,
             "activityrange" => $getActivityRange,
@@ -100,27 +106,53 @@ class AdminPageController extends Controller
      * @Route("/admin/edit/menupage", name="admin_edit_menupage")
      * @Security("is_granted('edit')")
      */
-    public function MenuPageEditAction()
+    public function MenuPageEditAction(Request $request)
     {
+
+        $entityManager = $this->getDoctrine()->getManager();
         $menycategories = $this->getDoctrine()->getRepository(Menucategories::class)->findAll();
+
+        $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "admin_edit_menupage"]);
+        $getActivityRange = $entityManager->getRepository(Activityrange::class)->findAll();
+        $deleteForm = $this->createFormBuilder()
+            ->add('deleteDescription', SubmitType::class, ["label" => "usuń"])
+            ->getForm();
+        $deleteForm->handleRequest($request);
+        if($deleteForm->isSubmitted() && $deleteForm->get('deleteDescription')->isClicked()){
+            $entityManager->remove($getPageDescription);
+            $entityManager->flush();
+            return $this->redirectToRoute("admin_edit_menupage");
+        }
 
         return $this->render($this->path . 'menupageedit.html.twig', [
             "menucategories" => $menycategories,
+            "pagedescription" => $getPageDescription,
+            "deleteform" => $deleteForm->createView()
         ]);
     }
     /**
      * @Route("/admin/edit/newspage", name="admin_edit_newspage")
      * @Security("is_granted('edit')")
      */
-    public function NewsPageEditAction()
+    public function NewsPageEditAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "newspage"]);
+        $getPageDescription = $entityManager->getRepository(Pagedescription::class)->findOneBy(["routename" => "show_news"]);
         $getNews = $entityManager->getRepository(News::class)->findAll();
+        $deleteForm = $this->createFormBuilder()
+            ->add('deleteDescription', SubmitType::class, ["label" => "usuń"])
+            ->getForm();
 
+        $deleteForm->handleRequest($request);
+        if($deleteForm->isSubmitted() && $deleteForm->get('deleteDescription')->isClicked()){
+            $entityManager->remove($getPageDescription);
+            $entityManager->flush();
+            return $this->redirectToRoute("admin_edit_newspage");
+        }
         return $this->render($this->path . 'newspageedit.html.twig',[
             "pagedescription" => $getPageDescription,
             "news" => $getNews,
+            "deleteform" => $deleteForm->createView(),
         ]);
     }
     /**
