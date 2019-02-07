@@ -15,6 +15,9 @@
         {{ form_label(form.price) }}
         {{ form_widget(form.price, {"attr": {"style": "display:block; margin:0px auto"}}) }}
         {{ form_widget(form.submit) }}
+        {% if categorymeal is defined %}
+            {{ form_widget(form.remove) }}
+        {% endif %}
         <a href="{{ url("menupage_menucategory_show", {"id": catid.CategoryId}) }}" class="button inline-block">Powrót</a>
         {{ form_end(form) }}
     </div>

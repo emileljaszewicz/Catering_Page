@@ -100,6 +100,33 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $registrationdate;
 
+    /**
+     * @var String
+     */
+    private $changepassword;
+
+    /**
+     * @var String
+     */
+    private $confirmpassword;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Pageroutes", inversedBy="userid")
+     * @ORM\JoinTable(name="userroutes",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="UserId", referencedColumnName="UserId")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="RouteId", referencedColumnName="RouteId")
+     *   }
+     * )
+     */
+    private $routeid;
+
+    private $usergrantedroutes;
+
     public function __construct()
     {
         $this->isactive = true;
@@ -392,6 +419,70 @@ class Users implements AdvancedUserInterface, \Serializable
         $this->imageid = $imageid;
 
         return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRouteid()
+    {
+        return $this->routeid;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $routeid
+     */
+    public function setRouteid(Pageroutes $routeid)
+    {
+        $this->routeid[] = $routeid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsergrantedroutes()
+    {
+        return $this->usergrantedroutes;
+    }
+
+    /**
+     * @param mixed $usergrantedroutes
+     */
+    public function setUsergrantedroutes($usergrantedroutes)
+    {
+        $this->usergrantedroutes = $usergrantedroutes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChangepassword()
+    {
+        return $this->changepassword;
+    }
+
+    /**
+     * @param mixed $changepassword
+     */
+    public function setChangepassword($changepassword): void
+    {
+        $this->changepassword = $changepassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmpassword()
+    {
+        return $this->confirmpassword;
+    }
+
+    /**
+     * @param mixed $confirmpassword
+     */
+    public function setConfirmpassword($confirmpassword)
+    {
+        $this->confirmpassword = $confirmpassword;
     }
 
 

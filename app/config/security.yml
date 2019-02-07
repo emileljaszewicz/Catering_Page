@@ -16,6 +16,9 @@ security:
             form_login:
                 login_path: login_action
                 check_path: login_action
+            logout:
+                path:   logout_action
+                target: /
 
     access_control:
             # require ROLE_ADMIN for /admin*

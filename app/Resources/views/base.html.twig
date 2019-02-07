@@ -27,17 +27,21 @@
         {% endblock %}
     </div>
     <div class="menu auto-side-margins align-center">
+        <div class="menu-links">
             <a href="{{ url("homepage") }}">Home</a>
             <a href="{{ url("view_offer") }}">Oferta</a>
             <a href="{{ url("categories") }}">Menu</a>
             <a href="{{ url("show_news") }}">Aktualności</a>
             <a href="{{ url("contact_form") }}">Kontakt</a>
+        </div>
+        <div class="menu-settings">
+            <a href="{{ url("shoppingbasket_order_show") }}" class="{% if app.session.get('basketProducts') is null %}display-none {% endif %}">Twój koszyk <div id="productAmount" class="{% if app.session.get('basketProducts') is null %}display-none {% endif %}" >( {{ app.session.get('basketProducts') | countOfProducts }} )</div></a>
         {% if is_granted('ROLE_USER') %}
             <a href="{{ url("admin_index") }}">Ustawienia</a>
+            <a href="{{ url("logout_action") }}">Wyloguj</a>
         {% endif %}
-        {% if app.session.get('basketProducts')%}
-            <a href="{{ url("shoppingbasket_order_show") }}">Twój koszyk</a> <div id="productAmount" style="display:inline-block">{{ app.session.get('basketProducts') | countOfProducts }}</div>
-        {% endif %}
+        </div>
+        <div class="clear-both"></div>
     </div>
     <div class="content">
         <div class="subpage-content">

@@ -245,7 +245,7 @@ class Meals
      *
      * @return Meals
      */
-    public function setCategoryid(\AppBundle\Entity\Menucategories $categoryid = null)
+    public function setCategoryid($categoryid = null)
     {
         $this->categoryid = $categoryid;
 

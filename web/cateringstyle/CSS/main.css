@@ -52,9 +52,26 @@ body{
     padding: 10px 5px 15px 10px;
 
 }
+.menu .menu-settings #productAmount{
+    display:inline;
+    color:black;
+    font-size:15px;
+}
 @media only screen and (min-width: 600px) {
+    .menu  .menu-links{
+        float:left;
+        width:50%;
+    }
+    .menu .menu-settings{
+        text-align:right;
+        float:right;
+        width:50%;
+    }
+    .menu .menu-settings a{
+        margin-right: 10px;
+    }
     .menu a {
-        font-size: 25px;
+        font-size: 20px;
         margin-left: 15px;
     }
 }

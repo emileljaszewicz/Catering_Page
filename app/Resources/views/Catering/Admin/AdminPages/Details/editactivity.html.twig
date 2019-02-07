@@ -12,9 +12,10 @@
             {% if image.ImageId is not null %}
                 <img src="{{ asset(image.ImageId | getImgName) }}" style="width:100px"/>
             {% endif %}
+        </div>
             {{ form_widget(form.submit, {"attr": {"class": "button"}}) }}
+            {{ form_widget(form.remove, {"attr": {"class": "button"}}) }}
             <a href="{{ url("admin_edit_offerpage") }}" class="button align-center" style="display:inline">Powrót</a>
             {{ form_end(form) }}
-        </div>
     </div>
 {% endblock %}

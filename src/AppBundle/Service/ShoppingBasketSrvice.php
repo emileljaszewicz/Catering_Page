@@ -89,4 +89,8 @@ class ShoppingBasketSrvice
             return $order;
         }
     }
+    public function closeBasketSession(){
+        $this->session->remove('clientData');
+        $this->session->remove('basketProducts');
+    }
 }

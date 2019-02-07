@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Meals;
 use AppBundle\Entity\Menucategories;
+use AppBundle\Entity\Orderpositions;
 use AppBundle\Entity\Orders;
 use AppBundle\Form\OrderFormType;
 use AppBundle\Service\ShoppingBasketSrvice;
@@ -102,49 +103,62 @@ class MenuController extends Controller
      * @Route("/shoppingbasket/order/show", name="shoppingbasket_order_show")
      */
     public function showOrderAction(\Symfony\Component\HttpFoundation\Request $request){
-        $orders = new Orders();
 
-        $changeAmountForm = $this->createFormBuilder()
-            ->add('content',TextType::class, ["label" => "podaj ilość"])
-            ->add('save',ButtonType::class, ["label" => "Zapisz"])
-            ->add('close',ButtonType::class, ["label" => "Anuluj"])
-            ->getForm();
-        $orderForm = $this->createForm(OrderFormType::class, $orders);
+        if(sizeof($this->shoppingBasket->getAllProducts()) > 0) {
+            $orders = new Orders();
+            $data = $request::createFromGlobals();
+            $changeAmountForm = $this->createFormBuilder()
+                ->add('content', TextType::class, ["label" => "podaj ilość"])
+                ->add('save', ButtonType::class, ["label" => "Zapisz"])
+                ->add('close', ButtonType::class, ["label" => "Anuluj"])
+                ->getForm();
+            $orderForm = $this->createForm(OrderFormType::class, $orders);
 
-        $finaliseButton = $this->createFormBuilder()
-            ->add('finalizeForm',ButtonType::class, ["label" => "Złóż zamówienie"])
-            ->getForm();
+            $finaliseButton = $this->createFormBuilder()
+                ->add('finalizeForm', ButtonType::class, ["label" => "Złóż zamówienie"])
+                ->getForm();
 
-        $orderForm->handleRequest($request);
-        if(($this->shoppingBasket->getProductsAmount() > 0) && $request->isMethod('post')) {
-            $this->shoppingBasket->addOwnerData($orders);
+            $orderForm->handleRequest($request);
 
-            return new \Symfony\Component\HttpFoundation\Response(
-                var_dump($request->query->get('showJson'))
-            );
-//
-//                return $this->redirectToRoute("shoppingbasket_transaction_finalise");
-//                exit;
+            if (($this->shoppingBasket->getProductsAmount() > 0) && $request->isMethod('post')) {
+                if (empty($request->get('action'))) {
+                    $this->shoppingBasket->addOwnerData($orders);
+                }
+                if ($request->get('action') == 'save') {
+                    return $this->redirectToRoute("shoppingbasket_transaction_finalise");
+                }
+                if ($request->get('action') == 'deleteOrder') {
+                    return $this->redirectToRoute("shoppingbasket_transaction_delete");
+                }
 
-        }
+                return new \Symfony\Component\HttpFoundation\Response(
+                    var_dump($data->get('action'))
+                );
 
-        foreach ($this->shoppingBasket->getAllProducts() as $categoryId => $basketProducts){
-            foreach ($basketProducts as $productId => $productDetails){
-                $deleteButton = $this->createFormBuilder()
-                    ->add("orderbutton", SubmitType::class, ["label" => "edytuj"])
-                    ->getForm();
-                $buttonsCollection[$productId] = $deleteButton->createView();
+
             }
-        }
-        $orderedProducts = $this->shoppingBasket->getAllProducts();
 
-        return $this->render("Catering/shoppingbasket.html.twig", [
-            "basketProducts" => $orderedProducts,
-            "changeAmountForm" => $changeAmountForm->createView(),
-            "openFinalizeForm" => $finaliseButton->createView(),
-            "buttons" => $buttonsCollection,
-            "orderForm" => $orderForm->createView(),
-        ]);
+            foreach ($this->shoppingBasket->getAllProducts() as $categoryId => $basketProducts) {
+                foreach ($basketProducts as $productId => $productDetails) {
+                    $deleteButton = $this->createFormBuilder()
+                        ->add("orderbutton", SubmitType::class, ["label" => "edytuj"])
+                        ->getForm();
+                    $buttonsCollection[$productId] = $deleteButton->createView();
+                }
+            }
+            $orderedProducts = $this->shoppingBasket->getAllProducts();
+
+            return $this->render("Catering/shoppingbasket.html.twig", [
+                "basketProducts" => $orderedProducts,
+                "changeAmountForm" => $changeAmountForm->createView(),
+                "openFinalizeForm" => $finaliseButton->createView(),
+                "buttons" => $buttonsCollection,
+                "orderForm" => $orderForm->createView(),
+            ]);
+        }
+        else{
+            return $this->redirectToRoute("homepage");
+        }
     }
 
     /**
@@ -153,9 +167,39 @@ class MenuController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function finaliseShoppingAction(){
-       $ownerData = $this->shoppingBasket->getOwnerData();
+        $ownerData = $this->shoppingBasket->getOwnerData();
+        $orderedProducts = $this->shoppingBasket->getAllProducts();
+        $orderPositions = new Orderpositions();
+
+        $eM = $this->getDoctrine()->getManager();
+        $eM->persist($ownerData);
+        $eM->flush();
+
+
+        foreach ($orderedProducts as $productCategory => $productData){
+            foreach ($productData as $product) {
+                $eM2 = $this->getDoctrine()->getManager();
+                $productOb = unserialize($product[0]);
+                $orderPositions->setMealid($productOb);
+                $orderPositions->setOrderid($ownerData);
+                $eM2->merge($orderPositions);
+                $eM2->flush();
+            }
+        }
+        $this->shoppingBasket->closeBasketSession();
         return new \Symfony\Component\HttpFoundation\Response(
-            json_encode($ownerData->getName())
+           var_dump('finalised')
+        );
+    }
+
+    /**
+     * @Route("/shoppingbasket/transaction/delete", name="shoppingbasket_transaction_delete")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteShoppingAction(){
+        $this->shoppingBasket->closeBasketSession();
+        return new \Symfony\Component\HttpFoundation\Response(
+            var_dump('deleted')
         );
     }
 }

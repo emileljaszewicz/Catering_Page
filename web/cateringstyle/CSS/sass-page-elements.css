@@ -287,7 +287,7 @@
 
 .admin-offerpage-container {
   width: 90%;
-  margin: 20px auto 20px auto;
+  margin: 20px auto 120px auto;
   text-align: left;
 }
 .admin-offerpage-container .button {
@@ -297,6 +297,7 @@
   box-sizing: border-box;
   border-bottom: 1px solid #b1b0af;
   margin-bottom: 20px;
+  padding: 0px 0px 50px 0px;
 }
 .admin-offerpage-container .event {
   box-sizing: border-box;
@@ -310,6 +311,7 @@
 .admin-offerpage-container .desc-container img {
   width: 100px;
   display: block;
+  margin: 20px 0px 20px 0px;
 }
 .admin-offerpage-container .event a {
   color: blue;

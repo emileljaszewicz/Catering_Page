@@ -30,7 +30,8 @@ class MenuCategoryType extends AbstractType
                 'class' => 'AppBundle:Images',
                 'choice_label' => 'imgname',
                 'label' => 'Zdjęcie z bazy',])
-            ->add("submit", SubmitType::class, ["label" => "Zapisz"]);
+            ->add("submit", SubmitType::class, ["label" => "Zapisz"])
+            ->add("remove", SubmitType::class, ["label" => "Usuń"]);
     }
     public function configureOptions(OptionsResolver$resolver)
     {

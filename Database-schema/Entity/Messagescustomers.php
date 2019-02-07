@@ -55,7 +55,12 @@ class Messagescustomers
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $messageid;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Name", type="string", length=50, nullable=false)
+     */
+    private $name;
 
 
     /**
@@ -187,4 +192,21 @@ class Messagescustomers
     {
         return $this->messageid;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
 }

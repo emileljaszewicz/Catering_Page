@@ -101,6 +101,16 @@ class Users implements AdvancedUserInterface, \Serializable
     private $registrationdate;
 
     /**
+     * @var String
+     */
+    private $changepassword;
+
+    /**
+     * @var String
+     */
+    private $confirmpassword;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Pageroutes", inversedBy="userid")
@@ -441,6 +451,38 @@ class Users implements AdvancedUserInterface, \Serializable
     public function setUsergrantedroutes($usergrantedroutes)
     {
         $this->usergrantedroutes = $usergrantedroutes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChangepassword()
+    {
+        return $this->changepassword;
+    }
+
+    /**
+     * @param mixed $changepassword
+     */
+    public function setChangepassword($changepassword): void
+    {
+        $this->changepassword = $changepassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmpassword()
+    {
+        return $this->confirmpassword;
+    }
+
+    /**
+     * @param mixed $confirmpassword
+     */
+    public function setConfirmpassword($confirmpassword)
+    {
+        $this->confirmpassword = $confirmpassword;
     }
 
 

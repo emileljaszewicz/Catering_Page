@@ -30,7 +30,8 @@ class ActivityType extends AbstractType
                 'choice_label' => 'imgname',
                 'label' => 'Wybierz zdjęcie',
             ])
-            ->add("submit", SubmitType::class, ["label" => "Zapisz"]);
+            ->add("submit", SubmitType::class, ["label" => "Zapisz"])
+            ->add("remove", SubmitType::class, ["label" => "Usuń"]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

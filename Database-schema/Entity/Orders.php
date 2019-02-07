@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Orders
 {
+
+
     /**
      * @var string
      *
@@ -45,7 +47,7 @@ class Orders
      *
      * @ORM\Column(name="OrderDate", type="datetime", nullable=false)
      */
-    private $orderdate = 'CURRENT_TIMESTAMP';
+    private $orderdate;
 
     /**
      * @var string
@@ -63,17 +65,20 @@ class Orders
      */
     private $orderid;
 
+
     /**
-     * @var \AppBundle\Entity\Meals
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Meals")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="MealId", referencedColumnName="MealId")
-     * })
+     * @ORM\Column(name="AdditionalInfo", type="string", length=45, nullable=true)
      */
-    private $mealid;
+    private $additionalinfo;
 
 
+    public function __construct()
+    {
+        $this->orderdate = new \DateTime();
+        $this->status = 'New';
+    }
 
     /**
      * Set name
@@ -252,4 +257,21 @@ class Orders
     {
         return $this->mealid;
     }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalinfo()
+    {
+        return $this->additionalinfo;
+    }
+
+    /**
+     * @param string $additionalinfo
+     */
+    public function setAdditionalinfo(string $additionalinfo)
+    {
+        $this->additionalinfo = $additionalinfo;
+    }
+
 }

@@ -48,6 +48,7 @@ $( document ).ready(function() {
                 }
                 $('#productAmount').text(response.amount)
                 $('#insertMealAmount').hide();
+                $('.menu-settings .display-none').removeClass('display-none');
 
             })
             .fail(function() {
@@ -59,33 +60,47 @@ $( document ).ready(function() {
     $('#form_finalizeForm').click(function(e){
         e.preventDefault();
         $('#realiseOrder').show();
-    })
+    });
+    $('#order_form_delete').click(function (e) {
+        var form = $('form[name=order_form]');
+        var action = form.attr('action');
+        e.preventDefault();
+        createajaxAction({action: "deleteOrder"}, action);
+
+        window.location.href = "/";
+
+    });
     $('#order_form_continueshopping').click(function (e) {
+        var form = $('form[name=order_form]');
+        var action = form.attr('action');
         e.preventDefault();
-       createajaxAction("continueShopping");
+       createajaxAction(form.serialize(), action);
         $('#realiseOrder').hide();
-    })
+    });
     $('#order_form_save').click(function (e) {
+        var form = $('form[name=order_form]');
+        var action = form.attr('action');
         e.preventDefault();
-        createajaxAction("save");
-    })
+        createajaxAction(form.serialize(), action);
+        createajaxAction({action: "save"}, action);
+    });
 });
-function createajaxAction($additionalData){
-    var form = $('form[name=order_form]');
-    var action = form.attr('action');
-    var formData = $(form).serialize();
+function createajaxAction($data, $action){
+
+
     $.ajax({
-        url: action,
+        url: $action,
         type: "post",
-        data: formData,
-        dataType: "json"
-    })
-        .done(function(response){
-            console.log(response);
-        })
-        .fail(function(error){
-            console.log('error '+ error)
-        });
+        data: $data,
+        error: function (request, error) {
+            console.log(request);
+            console.log(" Can't do because: " + error);
+
+        },
+        success: function (resp) {
+           console.log(resp);
+        }
+    });
 }
 function getProductData($url){
     var url = null;

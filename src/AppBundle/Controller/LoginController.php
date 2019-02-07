@@ -48,7 +48,17 @@ class LoginController extends Controller
                 'error'         => $error,
             ]);
     }
-
+    /**
+     * @Route("/admin/logout", name="logout_action")
+     *
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+    public function logOutFormAction(Request $request, AuthenticationUtils $authenticationUtils)
+    {
+        return true;
+    }
     /**
      * @Route("/register")
      *

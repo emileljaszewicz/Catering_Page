@@ -24,13 +24,14 @@ class PageElementsExtension extends \Twig_Extension
     }
     public function countOfProducts($products){
         $countOfProducts = null;
-        foreach ($products as $category => $productsList) {
-            foreach ($productsList as $product){
-                $countOfProducts += $product[2];
+        if(is_array($products)) {
+            foreach ($products as $category => $productsList) {
+                foreach ($productsList as $product) {
+                    $countOfProducts += $product[2];
+                }
+
             }
-
         }
-
         return $countOfProducts;
     }
 

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Orders
 {
+
+
     /**
      * @var string
      *
@@ -45,7 +47,7 @@ class Orders
      *
      * @ORM\Column(name="OrderDate", type="datetime", nullable=false)
      */
-    private $orderdate = 'CURRENT_TIMESTAMP';
+    private $orderdate;
 
     /**
      * @var string
@@ -63,15 +65,6 @@ class Orders
      */
     private $orderid;
 
-    /**
-     * @var \AppBundle\Entity\Meals
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Meals")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="MealId", referencedColumnName="MealId")
-     * })
-     */
-    private $mealid;
 
     /**
      * @var string
@@ -80,6 +73,12 @@ class Orders
      */
     private $additionalinfo;
 
+
+    public function __construct()
+    {
+        $this->orderdate = new \DateTime();
+        $this->status = 'New';
+    }
 
     /**
      * Set name

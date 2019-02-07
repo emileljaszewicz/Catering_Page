@@ -76,7 +76,7 @@ class Userranks
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
      */
     public function getRouteid()
     {
@@ -84,11 +84,11 @@ class Userranks
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $routeid
+     * @param Pageroutes $routeid
      */
-    public function setRouteid(\Doctrine\Common\Collections\Collection $routeid)
+    public function setRouteid(Pageroutes $routeid)
     {
-        $this->routeid = $routeid;
+        $this->routeid[] = $routeid;
     }
 
 }

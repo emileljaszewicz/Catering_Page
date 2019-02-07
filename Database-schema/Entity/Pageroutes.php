@@ -46,6 +46,13 @@ class Pageroutes
     private $rankid;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Users", mappedBy="routeid")
+     */
+    private $userid;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -96,9 +103,26 @@ class Pageroutes
     /**
      * @param \Doctrine\Common\Collections\Collection $rankid
      */
-    public function setRankid(\Doctrine\Common\Collections\Collection $rankid)
+    public function setRankid(Userranks $rankid)
     {
-        $this->rankid = $rankid;
+        $this->rankid[] = $rankid;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $userid
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+    }
+
 }
 

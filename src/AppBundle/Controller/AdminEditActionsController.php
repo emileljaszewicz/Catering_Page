@@ -202,7 +202,7 @@ class AdminEditActionsController extends Controller
 
         $form = $this->createForm(OfferPageType::class, $pagedescription);
         $backbutton = $this->createFormBuilder()
-            ->setAction($this->generateUrl("admin_edit_offerpage"))
+            ->setAction($this->generateUrl("admin_edit_newspage"))
             ->add('submit', SubmitType::class, ["label" => "powrót"])
             ->getForm();
         if($request->isMethod('post')){
@@ -253,12 +253,18 @@ class AdminEditActionsController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(ActivityType::class, $activityrange);
-
-        if($request->isMethod('post')){
-            $form->handleRequest($request);
-            $entityManager->persist($activityrange);
-            $entityManager->flush();
-            $this->addFlash('success', "Zaktualizowano dane");
+        $form->handleRequest($request);
+        if($request->isMethod('post')) {
+            if ($form->get('submit')->isClicked()) {
+                $entityManager->persist($activityrange);
+                $entityManager->flush();
+                $this->addFlash('success', "Zaktualizowano dane");
+            }
+            if ($form->get('remove')->isClicked()) {
+                $entityManager->remove($activityrange);
+                $entityManager->flush();
+                return $this->redirectToRoute("admin_edit_offerpage");
+            }
         }
         return $this->render($this->path . 'editactivity.html.twig',[
             "form" => $form->createView(),
@@ -369,11 +375,18 @@ class AdminEditActionsController extends Controller
         if($request->isMethod("POST"))
         {
             $form->handleRequest($request);
-            $entityManager->persist($menucategories);
-            $entityManager->flush();
+            if($form->get('submit')->isClicked()) {
+                $entityManager->persist($menucategories);
+                $entityManager->flush();
 
-            $this->addFlash("success", "Zaktualizowano kategorię");
-
+                $this->addFlash("success", "Zaktualizowano kategorię");
+            }
+            if($form->get('remove')->isClicked()) {
+                $entityManager->remove($menucategories);
+                $entityManager->flush();
+                $this->addFlash("success", "Pomyślnie usunięto kategorię");
+                return $this->redirectToRoute("admin_edit_menupage");
+            }
         }
 
         return $this->render($this->path . 'addmenucategory.html.twig', [
@@ -439,12 +452,21 @@ class AdminEditActionsController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(MenuCategoryMealType::class, $meals);
-
+        $form->add("remove", SubmitType::class, ["label" => "Usuń"]);
         if($request->isMethod("POST"))
         {
             $form->handleRequest($request);
-            $entityManager->persist($meals);
-            $entityManager->flush();
+
+            if($form->get("submit")->isClicked()){
+                $entityManager->persist($meals);
+                $entityManager->flush();
+            }
+            if($form->get("remove")->isClicked()){
+                $entityManager->remove($meals);
+                $entityManager->flush();
+                $this->addFlash('success',"Pomyślnie usunięto pozycję {$meals->getMealname()}");
+                return $this->redirectToRoute("menupage_menucategory_show", ["id" => $menucategories->getCategoryid()]);
+            }
 
             $this->addFlash("success", "Dodano nowe danie");
         }
@@ -551,16 +573,27 @@ class AdminEditActionsController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(NewsType::class, $news);
+        $form->add('remove', SubmitType::class, ["label" => "Usuń"]);
         $backbutton = $this->createFormBuilder()
             ->setAction($this->generateUrl("admin_edit_newspage"))
-            ->add('submit', SubmitType::class, ["label" => "powrót"])
+            ->add('submit', SubmitType::class, ["label" => "Powrót"])
             ->getForm();
 
         if($request->isMethod('post')){
             $form->handleRequest($request);
-            $entityManager->persist($news);
-            $entityManager->flush();
-            $this->addFlash('success', "Zaktualizowano dane");
+            if($form->get('submit')->isClicked()) {
+                $entityManager->persist($news);
+                $entityManager->flush();
+                $this->addFlash('success', "Zaktualizowano dane");
+            }
+            if($form->get('remove')->isClicked()) {
+                $entityManager->remove($news);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Pomyślnie usunięto newsa');
+                return $this->redirectToRoute("admin_edit_newspage");
+            }
+
         }
         return $this->render($this->path . 'addnews.html.twig',[
             "form" => $form->createView(),

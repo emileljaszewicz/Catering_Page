@@ -13,6 +13,9 @@
         {{ form_label(form.imageid) }}
         {{ form_widget(form.imageid, {"attr": {"style": "display:block; margin:0px auto"}}) }}
         {{ form_widget(form.submit) }}
+        {% if menucategories is defined %}
+            {{ form_widget(form.remove) }}
+        {% endif %}
         <a href="{{ url("admin_edit_menupage") }}" class="button inline-block">Powrót</a>
         {{ form_end(form) }}
     </div>

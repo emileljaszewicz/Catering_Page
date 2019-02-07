@@ -198,7 +198,7 @@ class AdminPageController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $form->handleRequest($request);
 
-               if(!$form->get('changepassword')->isEmpty() && !$form->get('confirmpassword')->isEmpty()){
+               if(!$form->get('changepassword')->isEmpty() || !$form->get('confirmpassword')->isEmpty()){
                    if($form->get('changepassword')->getData() == $form->get('confirmpassword')->getData()) {
                        $password = $passwordEncoder->encodePassword($user, $form->get('changepassword')->getData());
                        $user->setPassword($password);

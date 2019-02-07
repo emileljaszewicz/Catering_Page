@@ -1,2 +1,9 @@
-.bold{font-weight:bold}
+.bold {
+  font-weight: bold;
+}
+
+.display-none {
+  display: none;
+}
+
 /*# sourceMappingURL=data-format.css.map */
