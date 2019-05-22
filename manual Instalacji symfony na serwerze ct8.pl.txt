@@ -1,0 +1,11 @@
+upload Symfony V3.4:
+Przed uploadem na serwer:
+Ad.1: php bin/console --env=prod --no-debug
+Ad.2 composer install --no-dev --optimize-autoloader
+Ad.3 php bin/console cache:clear --env=prod --no-debug
+Ad.4 Wykonaæ upload na serwer do katalogu root bez katalogu web. Pliki z katalogu web wrzuciæ do katalogu public_html
+Po uploadzie na serwer:
+Ad.1: Zainstalowaæ composera
+Ad.2 php composer.phar install
+Ad.3 zmieniæ œcie¿kê Katalogi Open Basedir na: 
+/usr/home/mojanazwastrony/domains/mojanazwastrony.ct8.pl/public_html:/tmp:/usr/share:/usr/local/share/pear:/dev:/tmp:/usr/share:/
